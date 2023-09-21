@@ -26,6 +26,7 @@ use sp_version::RuntimeVersion;
 pub mod constants;
 use constants::*;
 use frame_system::{EnsureRoot, EnsureSigned};
+use pallet_mapped_assets::DefaultCallback;
 
 // A few exports that help ease life for downstream crates.
 pub use frame_support::{
@@ -636,36 +637,37 @@ impl pallet_fund_admin::Config for Runtime {
 }
 
 parameter_types! {
-	pub const LabelMaxLen:u32 = 32;
-	pub const MaxAuthsPerMarket:u32 = 3; // 1 of each role (1 owner, 1 admin, etc.)
-	pub const MaxRolesPerAuth: u32 = 2;
-	pub const MaxApplicants: u32 = 10;
-	pub const MaxBlockedUsersPerMarket: u32 = 100;
-	pub const NotesMaxLen: u32 = 256;
-	pub const MaxFeedbackLen: u32 = 256;
-	pub const NameMaxLen: u32 = 100;
-	pub const MaxFiles: u32 = 10;
-	pub const MaxApplicationsPerCustodian: u32 = 10;
-	pub const MaxMarketsPerItem: u32 = 10;
-	pub const MaxOffersPerMarket: u32 = 100;
+  pub const LabelMaxLen: u32 = 32;
+  pub const MaxAuthsPerMarket: u32 = 30;
+  pub const MaxRolesPerAuth : u32 = 1;
+  pub const MaxApplicants: u32 = 3;
+  pub const MaxBlockedUsersPerMarket: u32 = 100;
+  pub const NotesMaxLen: u32 = 256;
+  pub const MaxFeedbackLen: u32 = 256;
+  pub const NameMaxLen: u32 = 100;
+  pub const MaxFiles: u32 = 10;
+  pub const MaxApplicationsPerCustodian: u32 = 2;
+  pub const MaxMarketsPerItem: u32 = 10;
+  pub const MaxOffersPerMarket: u32 = 100;
 }
 impl pallet_gated_marketplace::Config for Runtime {
-	type RuntimeEvent = RuntimeEvent;
-	type MaxAuthsPerMarket = MaxAuthsPerMarket;
-	type MaxRolesPerAuth = MaxRolesPerAuth;
-	type MaxApplicants = MaxApplicants;
-	type MaxBlockedUsersPerMarket = MaxBlockedUsersPerMarket;
-	type LabelMaxLen = LabelMaxLen;
-	type NotesMaxLen = NotesMaxLen;
-	type MaxFeedbackLen = MaxFeedbackLen;
-	type NameMaxLen = NameMaxLen;
-	type MaxFiles = MaxFiles;
-	type MaxApplicationsPerCustodian = MaxApplicationsPerCustodian;
-	type MaxMarketsPerItem = MaxMarketsPerItem;
-	type MaxOffersPerMarket = MaxOffersPerMarket;
-	type Timestamp = Timestamp;
-	type Moment = Moment;
-	type Rbac = RBAC;
+  type RuntimeEvent = RuntimeEvent;
+  type MaxAuthsPerMarket = MaxAuthsPerMarket;
+  type MaxRolesPerAuth = MaxRolesPerAuth;
+  type MaxApplicants = MaxApplicants;
+  type MaxBlockedUsersPerMarket = MaxBlockedUsersPerMarket;
+  type LabelMaxLen = LabelMaxLen;
+  type NotesMaxLen = NotesMaxLen;
+  type MaxFeedbackLen = MaxFeedbackLen;
+  type NameMaxLen = NameMaxLen;
+  type MaxFiles = MaxFiles;
+  type MaxApplicationsPerCustodian = MaxApplicationsPerCustodian;
+  type MaxOffersPerMarket = MaxOffersPerMarket;
+  type MaxMarketsPerItem = MaxMarketsPerItem;
+  type Timestamp = Timestamp;
+  type Moment = u64;
+  //type LocalCurrency = Balances;
+  type Rbac = RBAC;
 }
 parameter_types! {
 	pub const XPubLen: u32 = XPUB_LEN;
@@ -725,6 +727,34 @@ impl pallet_confidential_docs::Config for Runtime {
 }
 
 parameter_types! {
+  pub const MaxReserves: u32 = 200;
+}
+
+impl pallet_mapped_assets::Config for Runtime {
+  type RuntimeEvent = RuntimeEvent;
+  type Balance = u128;
+  type AssetId = u32;
+  type Currency = Balances;
+  type CreateOrigin = AsEnsureOriginWithArg<EnsureSigned<AccountId>>;
+  type ForceOrigin = EnsureRoot<AccountId>;
+  type AssetDeposit = AssetDeposit;
+  type AssetAccountDeposit = ConstU128<DOLLARS>;
+  type MetadataDepositBase = MetadataDepositBase;
+  type MetadataDepositPerByte = MetadataDepositPerByte;
+  type ApprovalDeposit = ApprovalDeposit;
+  type StringLimit = StringLimit;
+  type Freezer = ();
+  type Extra = ();
+  type WeightInfo = ();
+  type MaxReserves = MaxReserves;
+  type ReserveIdentifier = u32;
+  type RemoveItemsLimit = RemoveItemsLimit;
+  type AssetIdParameter = u32;
+  type CallbackHandle = DefaultCallback;
+  type Rbac = RBAC;
+}
+
+parameter_types! {
 	pub const MaxScopesPerPallet: u32 = 1000;
 	pub const MaxRolesPerPallet: u32 = 50;
 	pub const RoleMaxLen: u32 = 50;
@@ -742,6 +772,30 @@ impl pallet_rbac::Config for Runtime {
 	type MaxPermissionsPerRole = MaxPermissionsPerRole;
 	type MaxRolesPerUser = MaxRolesPerUser;
 	type MaxUsersPerRole = MaxUsersPerRole;
+}
+
+impl pallet_afloat::Config for Runtime {
+  type RuntimeEvent = RuntimeEvent;
+  type Currency = Balances;
+  type TimeProvider = Timestamp;
+  //type RemoveOrigin = EnsureRoot<AccountId>;
+  type Rbac = RBAC;
+  type ItemId = u32;
+}
+
+parameter_types! {
+  pub const MaxRecordsAtTime:u32 = 50;
+}
+
+impl pallet_fund_admin_records::Config for Runtime {
+  type RuntimeEvent = RuntimeEvent;
+  type RemoveOrigin = EitherOfDiverse<
+    EnsureRoot<AccountId>,
+    pallet_collective::EnsureProportionAtLeast<AccountId, CouncilCollective, 3, 5>,
+  >;
+  type Timestamp = Timestamp;
+  type Moment = u64;
+  type MaxRecordsAtTime = MaxRecordsAtTime;
 }
 
 parameter_types! {
