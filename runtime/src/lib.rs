@@ -755,23 +755,28 @@ impl pallet_mapped_assets::Config for Runtime {
 }
 
 parameter_types! {
-	pub const MaxScopesPerPallet: u32 = 1000;
-	pub const MaxRolesPerPallet: u32 = 50;
-	pub const RoleMaxLen: u32 = 50;
-	pub const PermissionMaxLen: u32 = 50;
-	pub const MaxPermissionsPerRole: u32 = 100;
-	pub const MaxRolesPerUser: u32 = 10;
-	pub const MaxUsersPerRole: u32 = 2500;
+  pub const MaxScopesPerPallet: u32 = 1000;
+  pub const MaxRolesPerPallet: u32 = 50;
+  pub const RoleMaxLen: u32 = 50;
+  pub const PermissionMaxLen: u32 = 50;
+  pub const MaxPermissionsPerRole: u32 = 100;
+  pub const MaxRolesPerUser: u32 = 10;
+  pub const MaxUsersPerRole: u32 = 2500;
 }
+
 impl pallet_rbac::Config for Runtime {
-	type RuntimeEvent = RuntimeEvent;
-	type MaxScopesPerPallet = MaxScopesPerPallet;
-	type MaxRolesPerPallet = MaxRolesPerPallet;
-	type RoleMaxLen = RoleMaxLen;
-	type PermissionMaxLen = PermissionMaxLen;
-	type MaxPermissionsPerRole = MaxPermissionsPerRole;
-	type MaxRolesPerUser = MaxRolesPerUser;
-	type MaxUsersPerRole = MaxUsersPerRole;
+  type RuntimeEvent = RuntimeEvent;
+  type RemoveOrigin = EitherOfDiverse<
+    EnsureRoot<AccountId>,
+    pallet_collective::EnsureProportionAtLeast<AccountId, CouncilCollective, 3, 5>,
+  >;
+  type MaxScopesPerPallet = MaxScopesPerPallet;
+  type MaxRolesPerPallet = MaxRolesPerPallet;
+  type RoleMaxLen = RoleMaxLen;
+  type PermissionMaxLen = PermissionMaxLen;
+  type MaxPermissionsPerRole = MaxPermissionsPerRole;
+  type MaxRolesPerUser = MaxRolesPerUser;
+  type MaxUsersPerRole = MaxUsersPerRole;
 }
 
 impl pallet_afloat::Config for Runtime {
@@ -893,6 +898,9 @@ construct_runtime!(
 		RBAC: pallet_rbac,
 		ConfidentialDocs: pallet_confidential_docs,
 		FundAdmin: pallet_fund_admin,
+		Afloat: pallet_afloat,
+    MappedAssets: pallet_mapped_assets,
+    FundAdminRecords: pallet_fund_admin_records,
 	}
 );
 
