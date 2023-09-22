@@ -2634,6 +2634,7 @@ dependencies = [
  "frame-try-runtime",
  "hex-literal",
  "log",
+ "pallet-afloat",
  "pallet-assets",
  "pallet-aura",
  "pallet-balances",
@@ -2643,18 +2644,20 @@ dependencies = [
  "pallet-confidential-docs",
  "pallet-fruniques",
  "pallet-fund-admin",
+ "pallet-fund-admin-records",
  "pallet-gated-marketplace",
  "pallet-grandpa",
  "pallet-identity",
  "pallet-indices",
  "pallet-insecure-randomness-collective-flip",
+ "pallet-mapped-assets",
  "pallet-membership",
  "pallet-node-authorization",
  "pallet-rbac",
  "pallet-recovery",
  "pallet-society",
  "pallet-sudo",
- "pallet-template",
+ "pallet-template 4.0.0-dev",
  "pallet-timestamp",
  "pallet-transaction-payment",
  "pallet-transaction-payment-rpc-runtime-api",
@@ -4569,6 +4572,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "pallet-afloat"
+version = "4.0.0-dev"
+source = "git+https://github.com/hashed-io/hashed-pallets?tag=0.1.1#a8d1072fd5f9da83ce5f37737c25ccd77023b228"
+dependencies = [
+ "frame-benchmarking",
+ "frame-support",
+ "frame-system",
+ "log",
+ "pallet-balances",
+ "pallet-fruniques",
+ "pallet-gated-marketplace",
+ "pallet-mapped-assets",
+ "pallet-rbac",
+ "pallet-timestamp",
+ "pallet-uniques",
+ "parity-scale-codec",
+ "scale-info",
+ "serde",
+ "sp-runtime",
+]
+
+[[package]]
 name = "pallet-assets"
 version = "4.0.0-dev"
 source = "git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.40#98f2e3451c9143278ec53c6718940aeabcd3b68a"
@@ -4631,7 +4656,7 @@ dependencies = [
 [[package]]
 name = "pallet-bitcoin-vaults"
 version = "4.0.0-dev"
-source = "git+https://github.com/hashed-io/hashed-pallets?branch=bump-versions/substrate-940#1fdc53df2b035beff45a2c6dfe8cf99cb7755049"
+source = "git+https://github.com/hashed-io/hashed-pallets?tag=0.1.1#a8d1072fd5f9da83ce5f37737c25ccd77023b228"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
@@ -4686,7 +4711,7 @@ dependencies = [
 [[package]]
 name = "pallet-confidential-docs"
 version = "4.0.0-dev"
-source = "git+https://github.com/hashed-io/hashed-pallets?branch=bump-versions/substrate-940#1fdc53df2b035beff45a2c6dfe8cf99cb7755049"
+source = "git+https://github.com/hashed-io/hashed-pallets?tag=0.1.1#a8d1072fd5f9da83ce5f37737c25ccd77023b228"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
@@ -4698,7 +4723,7 @@ dependencies = [
 [[package]]
 name = "pallet-fruniques"
 version = "0.1.0-dev"
-source = "git+https://github.com/hashed-io/hashed-pallets?branch=bump-versions/substrate-940#1fdc53df2b035beff45a2c6dfe8cf99cb7755049"
+source = "git+https://github.com/hashed-io/hashed-pallets?tag=0.1.1#a8d1072fd5f9da83ce5f37737c25ccd77023b228"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
@@ -4715,7 +4740,7 @@ dependencies = [
 [[package]]
 name = "pallet-fund-admin"
 version = "4.0.0-dev"
-source = "git+https://github.com/hashed-io/hashed-pallets?branch=bump-versions/substrate-940#1fdc53df2b035beff45a2c6dfe8cf99cb7755049"
+source = "git+https://github.com/hashed-io/hashed-pallets?tag=0.1.1#a8d1072fd5f9da83ce5f37737c25ccd77023b228"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
@@ -4730,9 +4755,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "pallet-fund-admin-records"
+version = "4.0.0-dev"
+source = "git+https://github.com/hashed-io/hashed-pallets?tag=0.1.1#a8d1072fd5f9da83ce5f37737c25ccd77023b228"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "log",
+ "pallet-timestamp",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-runtime",
+]
+
+[[package]]
 name = "pallet-gated-marketplace"
 version = "4.0.0-dev"
-source = "git+https://github.com/hashed-io/hashed-pallets?branch=bump-versions/substrate-940#1fdc53df2b035beff45a2c6dfe8cf99cb7755049"
+source = "git+https://github.com/hashed-io/hashed-pallets?tag=0.1.1#a8d1072fd5f9da83ce5f37737c25ccd77023b228"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
@@ -4740,6 +4779,7 @@ dependencies = [
  "log",
  "pallet-balances",
  "pallet-fruniques",
+ "pallet-mapped-assets",
  "pallet-rbac",
  "pallet-timestamp",
  "pallet-uniques",
@@ -4820,6 +4860,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "pallet-mapped-assets"
+version = "4.0.0-dev"
+source = "git+https://github.com/hashed-io/hashed-pallets?tag=0.1.1#a8d1072fd5f9da83ce5f37737c25ccd77023b228"
+dependencies = [
+ "frame-benchmarking",
+ "frame-support",
+ "frame-system",
+ "pallet-rbac",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-runtime",
+ "sp-std",
+]
+
+[[package]]
 name = "pallet-membership"
 version = "4.0.0-dev"
 source = "git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.40#98f2e3451c9143278ec53c6718940aeabcd3b68a"
@@ -4855,7 +4910,7 @@ dependencies = [
 [[package]]
 name = "pallet-rbac"
 version = "4.0.0-dev"
-source = "git+https://github.com/hashed-io/hashed-pallets?branch=bump-versions/substrate-940#1fdc53df2b035beff45a2c6dfe8cf99cb7755049"
+source = "git+https://github.com/hashed-io/hashed-pallets?tag=0.1.1#a8d1072fd5f9da83ce5f37737c25ccd77023b228"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
@@ -4943,6 +4998,20 @@ dependencies = [
  "sp-core",
  "sp-io",
  "sp-runtime",
+]
+
+[[package]]
+name = "pallet-template"
+version = "4.0.0-dev"
+source = "git+https://github.com/hashed-io/hashed-pallets?tag=0.1.1#a8d1072fd5f9da83ce5f37737c25ccd77023b228"
+dependencies = [
+ "frame-benchmarking",
+ "frame-support",
+ "frame-system",
+ "log",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-std",
 ]
 
 [[package]]

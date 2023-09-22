@@ -64,13 +64,16 @@ frame-system-benchmarking = { git = "https://github.com/paritytech/substrate", b
 hex-literal = { version = "0.4.1", optional = true }
 
 # Hashed Dependencies
-pallet-template = { path = "../pallets/template", default-features = false }
-pallet-bitcoin-vaults = { git = "https://github.com/hashed-io/hashed-pallets", branch = "bump-versions/substrate-940", default-features = false }
-pallet-fruniques = { git = "https://github.com/hashed-io/hashed-pallets", branch = "bump-versions/substrate-940", default-features = false }
-pallet-gated-marketplace = { git = "https://github.com/hashed-io/hashed-pallets", branch = "bump-versions/substrate-940", default-features = false }
-pallet-rbac = { git = "https://github.com/hashed-io/hashed-pallets", branch = "bump-versions/substrate-940", default-features = false }
-pallet-confidential-docs = { git = "https://github.com/hashed-io/hashed-pallets", branch = "bump-versions/substrate-940", default-features = false }
-pallet-fund-admin = { git = "https://github.com/hashed-io/hashed-pallets", branch = "bump-versions/substrate-940", default-features = false }
+pallet-template = { git = "https://github.com/hashed-io/hashed-pallets", tag = "0.1.1", default-features = false }
+pallet-fruniques = { git = "https://github.com/hashed-io/hashed-pallets", tag = "0.1.1", default-features = false }
+pallet-bitcoin-vaults = { git = "https://github.com/hashed-io/hashed-pallets", tag = "0.1.1", default-features = false }
+pallet-gated-marketplace = { git = "https://github.com/hashed-io/hashed-pallets", tag = "0.1.1", default-features = false }
+pallet-rbac = { git = "https://github.com/hashed-io/hashed-pallets", tag = "0.1.1", default-features = false }
+pallet-confidential-docs = { git = "https://github.com/hashed-io/hashed-pallets", tag = "0.1.1", default-features = false }
+pallet-fund-admin = { git = "https://github.com/hashed-io/hashed-pallets", tag = "0.1.1", default-features = false }
+pallet-afloat = { git = "https://github.com/hashed-io/hashed-pallets", tag = "0.1.1", default-features = false }
+pallet-mapped-assets = { git = "https://github.com/hashed-io/hashed-pallets", tag = "0.1.1", default-features = false }
+pallet-fund-admin-records = { git = "https://github.com/hashed-io/hashed-pallets", tag = "0.1.1", default-features = false }
 
 [build-dependencies]
 substrate-wasm-builder = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.40" }
@@ -112,6 +115,8 @@ std = [
 	"pallet-rbac/std",
 	"pallet-confidential-docs/std",
 	"pallet-fund-admin/std",
+	"pallet-mapped-assets/std",
+	"pallet-afloat/std",
 	"sp-api/std",
 	"sp-block-builder/std",
 	"sp-consensus-aura/std",
@@ -167,4 +172,6 @@ try-runtime = [
 	"pallet-gated-marketplace/try-runtime",
 	"pallet-rbac/try-runtime",
 	"pallet-template/try-runtime",
+	"pallet-mapped-assets/try-runtime",
+	"pallet-afloat/try-runtime",
 ]
