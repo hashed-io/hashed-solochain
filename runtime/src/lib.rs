@@ -135,7 +135,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
 	// Chaos spec version
 	// spec_version: 153
 	// Inova spec version
-	spec_version: 167,
+	spec_version: 168,
 	impl_version: 1,
 	apis: RUNTIME_API_VERSIONS,
 	transaction_version: 1,
