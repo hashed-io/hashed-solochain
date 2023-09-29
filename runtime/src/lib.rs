@@ -133,9 +133,9 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
 	// This value is set to 100 to notify Polkadot-JS App (https://polkadot.js.org/apps) to use
 	//   the compatible custom types.
 	// Chaos spec version
-	// spec_version: 154, // toggle this line for chaos specs only (deployment)
+	spec_version: 155, // toggle this line for chaos specs only (deployment)
 	// Inova spec version
-	spec_version: 169, // toggle this line for inova specs only (deployment)
+	// spec_version: 169, // toggle this line for inova specs only (deployment)
 	impl_version: 1,
 	apis: RUNTIME_API_VERSIONS,
 	transaction_version: 1,
